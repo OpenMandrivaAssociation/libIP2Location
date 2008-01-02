@@ -12,6 +12,7 @@ License:        GPL
 URL:            http://www.ip2location.com/c.htm
 Source0:        http://www.ip2location.com/developers/c/C-IP2Location-%{version}.tar.bz2
 BuildRequires:  chrpath
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 IP2Location is a C library that enables the user to find the
