@@ -4,7 +4,7 @@
 
 Name:           libIP2Location
 Version:        1.1.0
-Release:        %mkrel 6
+Release:        7
 Epoch:          0
 Summary:        Find the country, region, etc. that any IP address or hostname originates from
 Group:          System/Libraries
@@ -12,7 +12,6 @@ License:        GPL
 URL:            http://www.ip2location.com/c.htm
 Source0:        http://www.ip2location.com/developers/c/C-IP2Location-%{version}.tar.bz2
 BuildRequires:  chrpath
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root
 
 %description
 IP2Location is a C library that enables the user to find the
@@ -37,8 +36,8 @@ written in C or supporting static/dynamic library.
 %package -n %{lib_name}-devel
 Summary:        Development files for %{name}
 Group:          System/Libraries
-Requires:       %{lib_name} = %{epoch}:%{version}-%{release}
-Provides:       %{name}-devel = %{epoch}:%{version}-%{release}
+Requires:       %{lib_name} = %{EVRD}
+Provides:       %{name}-devel = %{EVRD}
 
 %description -n %{lib_name}-devel
 This package contains the development files for %{name}.
@@ -46,8 +45,8 @@ This package contains the development files for %{name}.
 %package -n %{lib_name}-static-devel
 Summary:        Static development files for %{name}
 Group:          System/Libraries
-Requires:       %{lib_name}-devel = %{epoch}:%{version}-%{release}
-Provides:       %{name}-static-devel = %{epoch}:%{version}-%{release}
+Requires:       %{lib_name}-devel = %{EVRD}
+Provides:       %{name}-static-devel = %{EVRD}
 
 %description -n %{lib_name}-static-devel
 This package contains the static development files for %{name}.
@@ -61,7 +60,6 @@ This package contains the static development files for %{name}.
 %make
 
 %install
-%{__rm} -rf %{buildroot}
 %makeinstall
 
 %{__mv} %{buildroot}%{_libdir}/libIP2Location/* %{buildroot}%{_libdir}
@@ -78,17 +76,6 @@ This package contains the static development files for %{name}.
 
 %{__perl} -pi -e 's/\r$//g' AUTHORS ChangeLog COPYING README
 
-%clean
-%{__rm} -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{lib_name} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{lib_name} -p /sbin/ldconfig
-%endif
-
 %files -n %{lib_name}
 %defattr(0644,root,root,0755)
 %doc AUTHORS ChangeLog COPYING INSTALL NEWS README
@@ -99,10 +86,37 @@ This package contains the static development files for %{name}.
 %defattr(0644,root,root,0755)
 %dir %{_includedir}/libIP2Location
 %{_includedir}/libIP2Location/*.h
-%defattr(-,root,root,-)
-%{_libdir}/*.la
 
 %files -n %{lib_name}-static-devel
 %{_libdir}/*.a
 
+
+
+
+%changelog
+* Fri Dec 10 2010 Oden Eriksson <oeriksson@mandriva.com> 0:1.1.0-6mdv2011.0
++ Revision: 620065
+- the mass rebuild of 2010.0 packages
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 0:1.1.0-5mdv2010.0
++ Revision: 429773
+- rebuild
+
+* Fri Jul 25 2008 Thierry Vignaud <tv@mandriva.org> 0:1.1.0-4mdv2009.0
++ Revision: 248837
+- rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
+
+* Wed Jan 02 2008 Olivier Blin <oblin@mandriva.com> 0:1.1.0-2mdv2008.1
++ Revision: 140924
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Thu Sep 21 2006 David Walluck <walluck@mandriva.org> 0:1.1.0-1mdv2007.0
+- release
 
