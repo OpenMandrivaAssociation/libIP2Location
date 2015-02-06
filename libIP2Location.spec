@@ -4,7 +4,7 @@
 
 Name:           libIP2Location
 Version:        1.1.0
-Release:        7
+Release:        8
 Epoch:          0
 Summary:        Find the country, region, etc. that any IP address or hostname originates from
 Group:          System/Libraries
