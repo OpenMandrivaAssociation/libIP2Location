@@ -9,7 +9,7 @@ Epoch:          0
 Summary:        Find the country, region, etc. that any IP address or hostname originates from
 Group:          System/Libraries
 License:        GPL
-URL:            http://www.ip2location.com/c.htm
+URL:            https://www.ip2location.com/c.htm
 Source0:        http://www.ip2location.com/developers/c/C-IP2Location-%{version}.tar.bz2
 BuildRequires:  chrpath
 
